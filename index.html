@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>ATUA | Consultoría TI</title>
+<title>Omega Lab | Consultoría TI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -415,7 +415,7 @@ footer small{font-size:.8rem;color:var(--muted)}
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#hero" class="nav-logo">ATU<span class="dot">A</span></a>
+  <a href="#hero" class="nav-logo">Omega Lab</a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#tecnologias">Tecnología</a></li>
@@ -600,7 +600,7 @@ footer small{font-size:.8rem;color:var(--muted)}
     <div class="member">
       <div class="av-wrap"><div class="av-ring"><div class="av-ring-in"></div></div><div class="av">PA</div></div>
       <h3>Patricio Acevedo</h3><p class="role">Socio Fundador</p>
-      <p class="bio">Ingeniería y estrategia TI. Impulsor de la visión tecnológica de ATUA.</p>
+      <p class="bio">Ingeniería y estrategia TI. Impulsor de la visión tecnológica de Omega Lab.</p>
     </div>
     <div class="member">
       <div class="av-wrap"><div class="av-ring"><div class="av-ring-in"></div></div><div class="av">SR</div></div>
@@ -639,20 +639,20 @@ footer small{font-size:.8rem;color:var(--muted)}
 
 <!-- FOOTER -->
 <footer>
-  <span class="ft-logo">ATU<span class="dot">A</span></span>
-  <small>© 2026 ATUA Consultoría TI · Todos los derechos reservados.</small>
+  <span class="ft-logo">Omega Lab</span>
+  <small>© 2026 Omega Lab Consultoría TI · Todos los derechos reservados.</small>
 </footer>
 
 <script>
 /* ── THEME ── */
 const root = document.documentElement;
 const togBtn = document.getElementById('tog');
-try { const s = localStorage.getItem('atua-t'); if(s) root.setAttribute('data-theme',s); } catch(e){}
+try { const s = localStorage.getItem('omega-lab-t') || localStorage.getItem('atua-t'); if(s) root.setAttribute('data-theme',s); } catch(e){}
 togBtn.addEventListener('click', () => {
   const dark = root.getAttribute('data-theme') === 'dark';
   const next = dark ? 'light' : 'dark';
   root.setAttribute('data-theme', next);
-  try { localStorage.setItem('atua-t', next); } catch(e){}
+  try { localStorage.setItem('omega-lab-t', next); } catch(e){}
 });
 
 /* ── NAV SCROLL ── */
