@@ -211,8 +211,9 @@ nav.sc{background:var(--nav-sc);box-shadow:var(--sh-s)}
   border-radius:20px;overflow:hidden;
   border:1.5px solid var(--border);
   box-shadow:0 12px 60px var(--glow),0 2px 16px rgba(0,0,0,.08);
+  background:radial-gradient(ellipse at center,#e0faf6 0%,#f0fdfa 60%,#eef5ff 100%);
 }
-.hero-img-box img{width:100%;display:block}
+.hero-img-box img{width:100%;display:block;object-fit:contain;padding:2.5rem;filter:drop-shadow(0 0 18px rgba(0,194,168,0.35))}
 .hero-chip{
   position:absolute;bottom:16px;left:16px;
   background:rgba(255,255,255,.9);backdrop-filter:blur(12px);
@@ -220,6 +221,8 @@ nav.sc{background:var(--nav-sc);box-shadow:var(--sh-s)}
   padding:.6rem 1rem;display:flex;align-items:center;gap:.55rem;
 }
 [data-theme="dark"] .hero-chip{background:rgba(21,30,46,.9)}
+[data-theme="dark"] .hero-img-box{background:radial-gradient(ellipse at center,rgba(0,229,200,.06) 0%,#151e2e 70%)}
+[data-theme="dark"] .hero-img-box img{filter:drop-shadow(0 0 22px rgba(0,229,200,0.45)) brightness(1.1)}
 .chip-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px rgba(34,197,94,.5)}
 .hero-chip span{font-size:.77rem;font-weight:600;color:var(--text)}
 
@@ -288,8 +291,10 @@ nav.sc{background:var(--nav-sc);box-shadow:var(--sh-s)}
   scroll-snap-align:start;
   background:var(--surface);border:1.5px solid var(--border);border-radius:14px;overflow:hidden;
   transition:transform .3s,box-shadow .3s,border-color .3s;
+  position:relative;
 }
 .svc-card:hover{transform:translateY(-5px);box-shadow:var(--sh-l);border-color:rgba(0,194,168,.35)}
+.svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:190px;background:linear-gradient(135deg,rgba(0,194,168,.18) 0%,rgba(124,58,237,.12) 100%);z-index:1;pointer-events:none;border-radius:14px 14px 0 0}
 .svc-card img{width:100%;height:190px;object-fit:cover;display:block}
 .svc-body{padding:1.4rem 1.3rem}
 .svc-ico{width:38px;height:38px;background:var(--pale);border:1px solid rgba(0,194,168,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:.85rem}
@@ -376,6 +381,22 @@ nav.sc{background:var(--nav-sc);box-shadow:var(--sh-s)}
 .cta-email a:hover{text-decoration:underline}
 
 /* ════════════════════════════════
+   CONTACT FORM
+════════════════════════════════ */
+.contact-form{display:flex;flex-direction:column;gap:1rem;text-align:left}
+.contact-form input,.contact-form textarea{width:100%;padding:.7rem 1rem;border-radius:var(--r);border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border-color .3s}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--accent)}
+.contact-form textarea{resize:vertical;min-height:100px}
+.contact-form button{width:100%;justify-content:center}
+
+/* ════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.reveal.visible{opacity:1;transform:none}}
+
+/* ════════════════════════════════
    FOOTER
 ════════════════════════════════ */
 footer{
@@ -458,7 +479,7 @@ footer small{font-size:.8rem;color:var(--muted)}
     </div>
     <div class="hero-visual">
       <div class="hero-img-box">
-        <img src="Gemini_Generated_Image_nlyy5hnlyy5hnlyy.png" alt="Folil Logo" style="object-fit:contain;background:#fff;padding:2rem;"/>
+        <img src="Gemini_Generated_Image_nlyy5hnlyy5hnlyy.png" alt="Folil Logo"/>
         <div class="hero-chip">
           <span class="chip-dot"></span>
           <span>Innovando sin parar 24/7</span>
@@ -628,11 +649,16 @@ footer small{font-size:.8rem;color:var(--muted)}
   <h2 class="sec-title">¿Tienes un proyecto<br>en mente?</h2>
   <p class="sec-sub" style="margin:0 auto 2.5rem">Cuéntanos tu desafío y exploremos cómo la tecnología puede impulsar tu organización.</p>
   <div class="cta-box">
-    <p>Estamos disponibles para evaluar tu proyecto sin compromiso.</p>
-    <a href="mailto:Psacevedo@uc.cl" class="btn-cta">
-      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Escribir al equipo
-    </a>
+    <p>Completa el formulario y te respondemos en menos de 24 horas.</p>
+    <form class="contact-form" action="https://formspree.io/f/xpwzgkjb" method="POST">
+      <input type="text" name="nombre" placeholder="Tu nombre" required/>
+      <input type="email" name="email" placeholder="Tu email" required/>
+      <textarea name="mensaje" placeholder="Cuéntanos tu proyecto..." rows="4" required></textarea>
+      <button type="submit" class="btn-cta">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Enviar mensaje
+      </button>
+    </form>
     <div class="div-line">o directamente</div>
     <p class="cta-email"><a href="mailto:Psacevedo@uc.cl">Psacevedo@uc.cl</a></p>
   </div>
@@ -720,6 +746,20 @@ function setupDots(scrollId, dotsId) {
 
 setupDots('svcScroll',  'svcDots');
 setupDots('techScroll', 'techDots');
+
+/* ── SCROLL REVEAL ── */
+const revealEls = document.querySelectorAll('.stat, .svc-card, .tech-slide, .member, .mq-label, #hero .badge, .sec-tag, .sec-title');
+revealEls.forEach((el, idx) => { el.classList.add('reveal'); el.dataset.revealIdx = idx; });
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const delay = (parseInt(entry.target.dataset.revealIdx, 10) % 6) * 80;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObserver.observe(el));
 </script>
 </body>
 </html>
